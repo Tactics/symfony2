@@ -1,7 +1,7 @@
 {
-    "name": "symfony/symfony",
+    "name": "tactics/symfony2",
     "type": "library",
-    "description": "The Symfony PHP framework",
+    "description": "The Symfony2 PHP framework",
     "keywords": ["framework"],
     "homepage": "https://symfony.com",
     "license": "MIT",
@@ -13,6 +13,10 @@
         {
             "name": "Symfony Community",
             "homepage": "https://symfony.com/contributors"
+        },
+        {
+            "name": "Joris Hontelé",
+            "homepage": "joris@tactics.be"
         }
     ],
     "require": {
