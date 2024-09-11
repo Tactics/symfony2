@@ -1,0 +1,35 @@
+ahoyapi: v2
+commands:
+  up:
+    cmd: docker-compose --env-file .env.docker up -d --build --force-recreate "$@"
+    usage: Create and start containers.
+
+  down:
+    cmd: docker-compose --env-file .env.docker down "$@"
+    usage: Stop and remove containers, networks, images, and volumes.
+
+  composer:
+    cmd: docker-compose --env-file .env.docker exec -w /var/www/html php composer "$@"
+    usage: Run Composer commands in the php service container.
+
+  console:
+    cmd: docker-compose --env-file .env.docker exec -w /var/www/html php php bin/console "$@"
+    usage: Run Symfony commands in the php service container.
+  
+  tools:
+    cmd: |
+      echo "###> rector ###";
+      docker-compose --env-file .env.docker exec -w /var/www/html/tools/rector tools composer "$@";
+      echo "###< rector ###";
+      echo "###> php-cs-fixer ###";
+      docker-compose --env-file .env.docker exec -w /var/www/html/tools/php-cs-fixer php composer "$@";
+      echo "###< php-cs-fixer ###";
+    usage: Run Composer commands for rector and php-cs-fixer.
+
+  rector:
+    cmd: docker-compose --env-file .env.docker exec -w /var/www/html/tools tools bin/rector "$@"
+    usage: Run Rector commands in the tools service container.
+
+  php-cs-fixer:
+    cmd: docker-compose --env-file .env.docker exec -w /var/www/html/tools php bin/php-cs-fixer fix "$@"
+    usage: Run php-cs-fixer commands in the php service container.
